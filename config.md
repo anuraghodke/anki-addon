@@ -1,4 +1,4 @@
-# Modern Anki
+# Modern Anki (anki-addon)
 
 These values are managed by the add-on; you normally don't need to edit them.
 

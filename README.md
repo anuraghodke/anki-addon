@@ -1,6 +1,6 @@
-# Modern Anki (add-on)
+# anki-addon
 
-A cleaner, more direct Anki desktop UI.
+**Modern Anki** — a cleaner, more direct Anki desktop UI, packaged as an add-on.
 
 - Unified top/bottom bars with Decks · New · Edit · Stats, a Log in button and a light/dark toggle.
 - Deck list with per-deck edit / options / more icons and a today / streak / due stats card.
@@ -14,10 +14,10 @@ Requires Anki 26.09.4 or later (Qt6, FSRS available).
 
 ## Development
 
-Symlink this folder into Anki's `addons21/` folder (e.g. as `modern_anki`) during development. Restart Anki to pick up Python changes; CSS/JS are reloaded when the page is next shown.
+Symlink this folder into Anki's `addons21/` folder (e.g. as `anki_addon`) during development. Restart Anki to pick up Python changes; CSS/JS are reloaded when the page is next shown.
 
 ## Packaging
 
 ```sh
-rm -rf __pycache__ meta.json && zip -r modern_anki.ankiaddon . -x '.*' 'README.md' '*.ankiaddon'
+rm -rf __pycache__ meta.json && zip -r anki-addon.ankiaddon . -x '.*' 'README.md' '*.ankiaddon'
 ```

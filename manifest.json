@@ -1,7 +1,7 @@
 {
-  "package": "modern_anki",
+  "package": "anki_addon",
   "name": "Modern Anki",
   "min_point_version": 260904,
-  "homepage": "https://github.com/anuraghodke/modern-anki",
+  "homepage": "https://github.com/anuraghodke/anki-addon",
   "conflicts": []
 }
