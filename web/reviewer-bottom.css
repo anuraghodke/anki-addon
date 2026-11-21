@@ -1,0 +1,64 @@
+/* Reviewer bottom bar: edit / answer buttons / more. */
+#outer { padding: 6px 10px; }
+#innertable td.stat { padding-top: 10px; }
+#middle td[align="center"] { padding-top: 16px; }
+
+button {
+  position: relative;
+  margin: 6px 4px 8px;
+}
+.stattxt, .nobold {
+  top: -4px;
+  font-size: 11px;
+  color: var(--fg-subtle);
+  letter-spacing: 0.02em;
+}
+
+/* Show answer: the one primary action on screen. */
+#ansbut, body.fancy #ansbut {
+  min-width: 180px;
+  padding: 8px 22px;
+  background: var(--m-accent);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px var(--m-accent-ring);
+}
+#ansbut:hover, body.fancy #ansbut:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+}
+#ansbut .stattxt { color: var(--fg-subtle); }
+
+/* Ease buttons: solid, evenly sized, colour-coded by a top accent. */
+#outer button[data-ease],
+body.fancy #outer button[data-ease] {
+  min-width: 96px;
+  padding: 8px 16px 8px 28px;
+  background: var(--canvas-inset);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-weight: 600;
+}
+button[data-ease]::before {
+  content: "";
+  position: absolute;
+  left: 13px; top: 50%;
+  width: 7px; height: 7px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--m-ease-colour, var(--border));
+}
+button[data-ease="1"] { --m-ease-colour: var(--accent-danger); }
+button[data-ease="2"] { --m-ease-colour: var(--state-learn); }
+button[data-ease="3"] { --m-ease-colour: var(--state-review); }
+button[data-ease="4"] { --m-ease-colour: var(--state-new); }
+#outer button[data-ease]:hover,
+body.fancy #outer button[data-ease]:hover {
+  background: var(--canvas);
+  border-color: var(--border-strong);
+  box-shadow: var(--m-shadow);
+}
+button[data-ease]:focus,
+button[data-ease]:focus-visible {
+  border-color: var(--m-accent);
+}

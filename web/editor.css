@@ -1,0 +1,21 @@
+/* Note editor pane: bring labels and chrome in line with the rest of the UI. */
+body { font-size: 14px; }
+.label-container { padding: 0 2px 2px !important; }
+.label-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.field-container { margin-bottom: 8px; }
+.rich-text-input, .plain-text-input {
+  border-radius: 8px !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+.rich-text-input:focus-within, .plain-text-input:focus-within {
+  border-color: var(--m-accent, #2597E2) !important;
+  box-shadow: 0 0 0 3px rgba(37, 151, 226, 0.22) !important;
+}
+.tag-editor { font-size: 13px; }
+.editor-toolbar { padding-bottom: 6px !important; }

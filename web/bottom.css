@@ -1,0 +1,53 @@
+/* Bottom bars (deck list, overview, reviewer). Mirrors top.css. */
+body, body.fancy {
+  margin: 0;
+  background: var(--canvas-elevated);
+}
+#outer {
+  border-top: 1px solid var(--border-subtle);
+  background: var(--canvas-elevated);
+}
+#header {
+  padding: 7px 12px;
+  margin: 0;
+  border: 0;
+}
+button,
+body.fancy button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin: 0 3px;
+  padding: 6px 14px;
+  border-radius: var(--m-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fg-subtle);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 120ms var(--m-ease), color 120ms var(--m-ease),
+    border-color 120ms var(--m-ease), box-shadow 120ms var(--m-ease);
+}
+button:hover,
+body.fancy button:hover {
+  background: var(--m-accent-soft);
+  border-color: transparent;
+  color: var(--m-accent-fg);
+  box-shadow: none;
+}
+button:active,
+body.fancy button:active {
+  background: var(--canvas);
+}
+button:focus-visible {
+  outline: 2px solid var(--m-accent);
+  outline-offset: 1px;
+}
+
+/* Deck list has no bottom actions any more; collapse the empty bar. */
+#header:not(:has(button)) { display: none; }
+#outer:not(:has(button)) { border-top: 0; }

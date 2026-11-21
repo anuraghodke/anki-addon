@@ -1,0 +1,120 @@
+/* Top navigation bar. Shares its look with bottom.css. */
+body, body.fancy {
+  margin: 0;
+  background: var(--canvas-elevated);
+}
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 6px 14px;
+  background: var(--canvas-elevated);
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+.left-tray, .right-tray {
+  align-self: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg-subtle);
+  font-size: 12px;
+}
+.tray-item { display: inline-flex; align-items: center; }
+
+/* Segmented nav pill. Override the "fancy" glass block from toolbar.css. */
+body.fancy .toolbar,
+body.fancy:not(.flat) .toolbar,
+body.fancy:not(.flat) .toolbar:hover,
+.toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--canvas-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--m-pill);
+  box-shadow: none;
+  backdrop-filter: none;
+  overflow: visible;
+}
+body.fancy:not(.flat) .hitem,
+body.fancy .hitem,
+.hitem,
+.hitem:first-child,
+.hitem:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--m-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fg-subtle);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background 120ms var(--m-ease), color 120ms var(--m-ease),
+    box-shadow 120ms var(--m-ease);
+}
+body.fancy .hitem:hover,
+.hitem:hover {
+  background: var(--canvas-elevated);
+  color: var(--fg);
+  border-color: transparent;
+  text-decoration: none;
+}
+body.fancy .hitem:active,
+.hitem:active {
+  background: var(--canvas);
+}
+.hitem.m-active,
+body.fancy .hitem.m-active {
+  background: var(--canvas-elevated);
+  color: var(--m-accent-fg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+#sync-spinner {
+  height: 14px;
+  margin: 0;
+}
+.spin { width: 14px !important; margin-left: 2px; }
+
+/* Keep the slide-away behaviour in review mode but soften it. */
+body.fancy { margin-bottom: 0; }
+body.fancy.hidden { transform: translateY(-100%); }
+
+
+/* Light / dark toggle */
+.m-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  border-radius: var(--m-pill);
+  background: var(--m-accent-soft);
+  color: var(--m-accent-fg);
+  border: 1px solid transparent;
+  transition: background 120ms var(--m-ease), color 120ms var(--m-ease);
+}
+.m-theme:hover { background: var(--m-accent); color: #fff; }
+.m-theme svg { display: block; }
+
+/* Log in / Sync button, left of the theme toggle */
+.right-tray .tray-item { margin-left: 4px; }
+.right-tray .m-login,
+body.fancy .right-tray .m-login {
+  padding: 4px 12px !important;
+  border: 1px solid transparent !important;
+  background: var(--m-accent-soft);
+  color: var(--m-accent-fg);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.right-tray .m-login:hover { background: var(--m-accent); color: #fff; }
+.right-tray .m-login { gap: 0; }
+/* The hidden sync spinner still reserves gap/margin; drop it unless spinning. */
+.right-tray .m-login #sync-spinner:not(.spin) { display: none; margin: 0; }
+.right-tray .m-login #sync-spinner.spin { margin-left: 6px; }

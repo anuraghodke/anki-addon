@@ -1,0 +1,98 @@
+/* Deck overview. */
+body, body.fancy {
+  margin: 0;
+  padding: var(--m-page-top) var(--m-page-x) var(--m-page-bottom);
+}
+h3 {
+  margin: 0 0 4px;
+  color: var(--fg);
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.smallLink {
+  font-size: 12px;
+  color: var(--m-accent-fg);
+}
+.descfont {
+  max-width: 560px;
+  margin: 10px auto 0;
+  padding: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--fg-subtle);
+}
+
+/* Counts + study card */
+center > table[width="400"] {
+  margin-top: 22px;
+  padding: 18px 22px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--canvas-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--m-radius);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+center > table[width="400"] > tbody > tr > td { padding: 0 14px; }
+table[cellspacing="5"] td {
+  padding: 6px 6px;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--fg-subtle);
+}
+table[cellspacing="5"] td:last-child { text-align: end; }
+table[cellspacing="5"] b {
+  font-weight: 600;
+  font-size: 16px;
+}
+table[cellspacing="5"] .new-count,
+table[cellspacing="5"] .learn-count,
+table[cellspacing="5"] .review-count {
+  display: inline-block;
+  min-width: 2.4em;
+  padding: 1px 8px;
+  border-radius: var(--m-pill);
+  text-align: center;
+}
+table[cellspacing="5"] .new-count    { background: color-mix(in srgb, var(--state-new) 14%, transparent); }
+table[cellspacing="5"] .learn-count  { background: color-mix(in srgb, var(--state-learn) 14%, transparent); }
+table[cellspacing="5"] .review-count { background: color-mix(in srgb, var(--state-review) 14%, transparent); }
+
+#study, body.fancy #study {
+  width: auto !important;
+  min-width: 140px;
+  padding: 10px 22px;
+  border-radius: var(--m-pill);
+  border: 1px solid transparent;
+  background: var(--m-accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 10px var(--m-accent-ring);
+  transition: filter 120ms var(--m-ease), box-shadow 120ms var(--m-ease),
+    transform 120ms var(--m-ease);
+}
+#study:hover, body.fancy #study:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 6px 18px var(--m-accent-ring);
+}
+#study:active { transform: translateY(1px); }
+
+/* Hide the deck description blurb and the shared-deck link on the overview. */
+.descfont, .smallLink { display: none !important; }
+
+/* Gear next to the deck title opens this deck's options */
+h3 { display: inline-flex; align-items: center; gap: 10px; }
+.m-gear {
+  display: inline-flex;
+  width: 28px; height: 28px;
+  align-items: center; justify-content: center;
+  border-radius: var(--m-pill);
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 120ms var(--m-ease), background 120ms var(--m-ease);
+}
+.m-gear:hover { opacity: 1; background: var(--m-accent-soft); }
+.m-gear img { width: 16px; height: 16px; }
+.night-mode .m-gear img, .nightMode .m-gear img { filter: invert(1); }

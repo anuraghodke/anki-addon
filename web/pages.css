@@ -1,0 +1,244 @@
+/* Shared look for Anki's Svelte pages: deck options, stats, change notetype,
+   imports, card info. Injected via webview_did_inject_style_into_page.
+   Sticky header bars are left as Anki ships them. */
+:root {
+  --m-radius: 12px;
+  --m-pill: 999px;
+  --m-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --m-accent: #2597E2;
+  --m-accent-light: #7ABEED;
+  --m-accent-fg: #2597E2;
+  --m-accent-soft: rgba(37, 151, 226, 0.14);
+  --m-accent-ring: rgba(37, 151, 226, 0.28);
+}
+.night-mode, .nightMode {
+  --m-accent-fg: #7ABEED;
+  --m-accent-soft: rgba(122, 190, 237, 0.16);
+  --m-accent-ring: rgba(122, 190, 237, 0.32);
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI",
+    Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+}
+
+/* Section cards */
+{ padding-top: 8px; }
+.row.row-columns { padding-block: 8px; }
+.container.dark,
+.container.light {
+  padding: 16px 20px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--m-radius);
+  background: var(--canvas-elevated);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.container.dark { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+.container.dark h1,
+.container.light h1 {
+  margin: 0 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+}
+/* The help dialog is a descendant of .help-badge, so never put transform or
+   opacity on the badge itself; style only its button. */
+.help-badge { top: 2px !important; }
+.help-badge > .badge {
+  opacity: 0.55;
+  font-size: 0.85em;
+  transition: opacity 120ms var(--m-ease);
+}
+.help-badge > .badge:hover { opacity: 1; }
+
+/* Setting rows */
+.setting-title {
+  font-size: 13.5px;
+  color: var(--fg);
+}
+.row:not(.row-columns) {
+  padding-block: 5px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+.spin-box,
+.select-container {
+  border-radius: 8px !important;
+  border: 1px solid var(--border-subtle) !important;
+  background: var(--canvas-inset) !important;
+  font-size: 13.5px;
+  transition: border-color 120ms var(--m-ease), box-shadow 120ms var(--m-ease);
+}
+.spin-box input,
+.spin-box input:focus {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+input:focus,
+.spin-box:focus-within,
+.select-container:focus-within,
+textarea:focus {
+  border-color: var(--m-accent) !important;
+  box-shadow: 0 0 0 3px var(--m-accent-ring) !important;
+  outline: 0;
+}
+.spin-box .spinner { opacity: 0.6; }
+.spin-box:hover .spinner { opacity: 1; }
+
+/* Tabs: Preset / This deck / Today only -> segmented control */
+ul:has(> li > button):not(.modal *) {
+  display: inline-flex !important;
+  width: auto !important;
+  gap: 2px;
+  padding: 3px !important;
+  margin: 0 0 6px !important;
+  border-radius: var(--m-pill);
+  background: var(--canvas-inset);
+  border: 1px solid var(--border-subtle);
+}
+ul:not(.modal *) > li > button {
+  padding: 3px 12px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--m-pill) !important;
+  font-size: 12px !important;
+  color: var(--fg-subtle);
+  background: transparent !important;
+}
+ul:not(.modal *) > li.active > button {
+  background: var(--canvas-elevated) !important;
+  color: var(--m-accent-fg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid transparent !important;
+}
+
+/* Switches */
+.form-switch .form-check-input:checked {
+  background-color: var(--m-accent) !important;
+  border-color: var(--m-accent) !important;
+}
+.form-switch .form-check-input {
+  width: 2.6em;
+  height: 1.4em;
+  border-radius: var(--m-pill);
+  cursor: pointer;
+}
+
+/* Warnings */
+.alert {
+  border-radius: 10px;
+  font-size: 13px;
+  padding: 8px 12px;
+}
+.alert-warning {
+  background: color-mix(in srgb, var(--state-learn) 14%, var(--canvas-elevated));
+  border-color: color-mix(in srgb, var(--state-learn) 35%, transparent);
+  color: var(--fg);
+}
+
+/* Stats page */
+.graphs-container { gap: 14px; margin-top: 16px; }
+.range-box {
+  padding: 10px 16px !important;
+  background: var(--canvas-elevated) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+.range-box .spin { font-size: 1.4em; }
+.range-box label {
+  padding: 3px 10px;
+  border-radius: var(--m-pill);
+  border: 1px solid var(--border-subtle);
+  font-size: 13px;
+  color: var(--fg-subtle);
+  cursor: pointer;
+}
+.range-box label:has(input:checked) {
+  background: var(--m-accent-soft);
+  color: var(--m-accent-fg);
+  border-color: transparent;
+}
+.range-box input[type="radio"] { accent-color: var(--m-accent); }
+.range-box input[type="text"] {
+  min-width: 220px;
+  padding: 4px 10px;
+}
+.graph .subtitle {
+  font-size: 12.5px;
+  color: var(--fg-subtle);
+  margin-bottom: 8px;
+}
+.graph table td { padding: 3px 6px; font-size: 13px; }
+.graph table td.align-end { color: var(--fg-subtle); }
+
+/* Card info */
+.stats-table { font-size: 13.5px; border-collapse: separate; border-spacing: 0; }
+.stats-table th { font-weight: 500; color: var(--fg-subtle); padding: 5px 12px 5px 0; }
+.stats-table td { padding: 5px 0; }
+.stats-table tr + tr th, .stats-table tr + tr td { border-top: 1px solid var(--border-subtle); }
+
+/* Buttons shared by change notetype / imports */
+.label-button {
+  border-radius: var(--m-pill) !important;
+  font-weight: 600;
+}
+.label-button.primary {
+  background: var(--m-accent) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* Custom Study section added to deck options */
+.m-custom-study-row { display: flex; align-items: center; gap: 12px; padding: 4px 0 2px; }
+.m-custom-study-row .setting-title { flex: 1; color: var(--fg-subtle); font-size: 13px; }
+.m-custom-study-btn {
+  padding: 6px 16px;
+  border-radius: var(--m-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--canvas-inset);
+  color: var(--fg);
+  font-weight: 600;
+  cursor: pointer;
+}
+.m-custom-study-btn:hover { background: var(--m-accent-soft); color: var(--m-accent-fg); border-color: transparent; }
+
+/* Med School preset picker in deck options */
+.m-preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 6px 0 10px; }
+.m-preset {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: var(--canvas-inset);
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 120ms var(--m-ease), background 120ms var(--m-ease);
+}
+.m-preset:hover { border-color: var(--border); }
+.m-preset.is-active { border-color: var(--m-accent); }
+.m-preset.is-active .m-preset-name { color: var(--m-accent-fg); }
+/* Clean geometric check mark (SVG), not a font glyph */
+.m-preset.is-active .m-preset-name::after {
+  content: "";
+  display: inline-block;
+  width: 14px; height: 14px;
+  margin-left: 8px;
+  vertical-align: -2px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12.5l5 5L20 6.5'/></svg>") no-repeat center / contain;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12.5l5 5L20 6.5'/></svg>") no-repeat center / contain;
+}
+.m-preset-name { font-weight: 650; font-size: 14px; }
+.m-preset-blurb { font-size: 12px; color: var(--fg-subtle); line-height: 1.35; }
+.m-preset-note { font-size: 12px; color: var(--fg-subtle); line-height: 1.4; }

@@ -1,0 +1,175 @@
+/* Deck list. */
+body, body.fancy {
+  margin: 0;
+  padding: var(--m-page-top) var(--m-page-x) var(--m-page-bottom);
+}
+center > br { display: none; }
+
+/* Card container */
+table,
+body.fancy table {
+  display: inline-table;
+  width: 760px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--canvas-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--m-radius);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  backdrop-filter: none;
+  text-align: start;
+}
+body.fancy table:hover { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); }
+
+/* Header row */
+th {
+  padding: 10px 12px 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+th.count { text-align: end; }
+
+/* Deck rows */
+tr.deck td,
+body.fancy tr.deck td {
+  padding: 9px 12px;
+  border: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 14px;
+  transition: background 100ms var(--m-ease);
+}
+tr.top-level-drag-row td { border-bottom: 0; padding: 2px; }
+a.deck {
+  min-width: 0;
+  font-weight: 500;
+  color: var(--fg);
+}
+a.deck:hover { text-decoration: none; color: var(--m-accent-fg); }
+.collapse {
+  color: var(--fg-faint);
+  width: 1.2em;
+  font-size: 11px;
+}
+.collapse:hover { color: var(--fg); }
+
+tr.deck:hover td,
+.current td {
+  background: var(--canvas-inset);
+}
+.current td { background: var(--m-accent-soft); }
+.current td:first-child { box-shadow: inset 3px 0 0 var(--m-accent); }
+tr.deck:hover td:first-child, .current td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+tr.deck:hover td:last-child, .current td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+tr.drag-hover td { border-bottom-color: var(--m-accent); }
+
+/* Count pills */
+td[align="end"] { width: 4.5em; }
+.new-count, .learn-count, .review-count, .zero-count {
+  display: inline-block;
+  min-width: 2.6em;
+  padding: 2px 8px;
+  border-radius: var(--m-pill);
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.new-count    { background: color-mix(in srgb, var(--state-new) 14%, transparent); }
+.learn-count  { background: color-mix(in srgb, var(--state-learn) 14%, transparent); }
+.review-count { background: color-mix(in srgb, var(--state-review) 14%, transparent); }
+.zero-count   { color: var(--fg-faint); font-weight: 500; }
+
+.gears {
+  opacity: 0.45;
+  padding-top: 0;
+  vertical-align: middle;
+}
+.gears:hover { opacity: 0.9; }
+.m-opts { white-space: nowrap; }
+.m-opts a { display: inline-block; padding: 2px 4px; cursor: pointer; }
+.m-more, .m-pencil { width: 1.05em; height: 1.05em; }
+.night-mode .m-more, .nightMode .m-more, .night-mode .m-pencil, .nightMode .m-pencil { filter: invert(1); }
+
+/* Today strip */
+.m-today {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 760px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 18px 0 0;
+  padding: 18px 20px 16px;
+  text-align: start;
+  background: var(--canvas-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--m-radius);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.m-headline {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.m-sub {
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--fg-subtle);
+}
+.m-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.m-tile {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--canvas-inset);
+  border: 1px solid transparent;
+}
+.m-value {
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.1;
+  color: var(--fg);
+}
+.m-label {
+  margin-top: 3px;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--fg-subtle);
+}
+.m-tile.today .m-value  { color: var(--state-review); }
+.m-tile.due .m-value    { color: var(--m-accent-fg); }
+.m-tile.due { background: var(--m-accent-soft); }
+.m-tile.due.zero .m-value { color: var(--fg-faint); }
+.m-tile.streak.warm .m-value { color: var(--state-learn); }
+.m-tile.streak.hot .m-value  { color: var(--accent-danger); }
+.m-tile.streak.hot .m-value::after { content: " 🔥"; font-size: 14px; }
+.m-today.done .m-headline::after { content: " ✓"; color: var(--m-accent-fg); }
+
+@media (max-width: 640px) {
+  .m-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Accent strip along the top of the today card */
+.m-today::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 3px;
+  background: var(--m-accent-light);
+}
